@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adeena Yasin — Data Analyst Portfolio</title>
+  <meta name="description" content="Portfolio of Adeena Yasin — Data Cleaning, SQL, Power BI, Python, Excel, ML."/>
+  <style>
+    :root{
+      --blue:#0f6fb6;
+      --blue-2:#0b5a95;
+      --muted:#6b7280;
+      --bg:#f6f9fb;
+      --card:#ffffff;
+      --radius:14px;
+      --shadow: 0 10px 30px rgba(12,40,70,0.08);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b2a44;line-height:1.5}
+    a{color:var(--blue)}
+    img{max-width:100%;display:block;border-radius:8px}
+
+    /* Header / Nav */
+    header{
+      background:linear-gradient(90deg,var(--blue),var(--blue-2));
+      color:white;padding:18px 22px;position:sticky;top:0;z-index:50;box-shadow:0 6px 22px rgba(8,24,46,0.12);
+    }
+    .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:20px}
+    .brand{font-weight:800;font-size:20px}
+    nav{margin-left:auto;display:flex;gap:12px;align-items:center}
+    nav a{color:rgba(255,255,255,0.98);padding:8px 12px;border-radius:10px;text-decoration:none}
+    nav a:hover{background:rgba(255,255,255,0.06)}
+    .cta{background:white;color:var(--blue);padding:8px 12px;border-radius:999px;font-weight:700;text-decoration:none}
+
+    /* Hero */
+    .hero-wrap{max-width:1100px;margin:-34px auto 16px;padding:20px}
+    .hero{
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border-radius:18px;padding:28px;display:flex;gap:20px;align-items:center;box-shadow:var(--shadow);
+      color:#fff;overflow:hidden;
+    }
+    .hero-left{flex:1;padding-left:12px}
+    .hero h1{margin:0;font-size:32px;line-height:1.04}
+    .hero p.lead{margin:10px 0 0;color:rgba(255,255,255,0.92);font-size:15px}
+    .hero .buttons{margin-top:16px;display:flex;gap:12px}
+    .btn{background:white;color:var(--blue);padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:white}
+    .hero-stats{display:flex;gap:12px;margin-top:18px}
+    .stat{background:rgba(255,255,255,0.07);padding:10px 12px;border-radius:12px;min-width:110px;text-align:center}
+    .stat strong{display:block;font-size:20px;color:white}
+
+    .hero-right{width:360px;flex:0 0 360px;padding:6px}
+    .hero-card{background:var(--card);color:#08304f;border-radius:12px;padding:12px;box-shadow:0 10px 28px rgba(8,24,46,0.08)}
+    .hero-card img{height:180px;object-fit:cover;border-radius:8px}
+
+    /* Layout */
+    .wrap{max-width:1100px;margin:18px auto;padding:0 18px;display:flex;gap:20px;align-items:flex-start}
+    .content{flex:1}
+    .sidebar{width:280px;flex:0 0 280px}
+
+    /* About */
+    .about{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 10px 28px rgba(8,24,46,0.05);margin-bottom:14px}
+    .about-grid{display:flex;gap:14px;align-items:center}
+    .about-left{flex:0 0 220px}
+    .about-right{flex:1}
+    .about-right h3{margin:0 0 8px 0;color:#08304f}
+    .learn-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+    .skill-chip{display:inline-block;padding:8px 10px;background:#eef6ff;color:var(--blue);border-radius:999px;font-weight:700;font-size:13px}
+
+    /* Projects */
+    .projects-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);border-radius:12px;padding:0;box-shadow:0 10px 28px rgba(8,24,46,0.06);overflow:hidden;display:flex;flex-direction:column}
+    .card .card-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .tag{display:inline-block;padding:6px 8px;border-radius:999px;background:#eef6fb;color:var(--blue);font-weight:700;font-size:12px}
+    .meta{color:var(--muted);font-size:13px}
+    .card h4{margin:6px 0 0 0;color:#08304f}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+
+    /* Sidebar */
+    .panel{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 10px 28px rgba(8,24,46,0.05)}
+    .panel h5{margin:0 0 8px 0}
+    .checkbox{display:flex;gap:8px;align-items:center;margin:8px 0}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;z-index:80;padding:18px}
+    .modal{background:white;width:880px;max-width:100%;border-radius:12px;overflow:hidden}
+    .modal-body{display:flex;gap:18px;padding:16px}
+    .modal-left{flex:1}
+    .modal-right{flex:1;display:flex;flex-direction:column}
+    .close{background:#f3f4f6;border-radius:8px;padding:6px 10px;cursor:pointer}
+    .btn-link{background:transparent;border:1px solid var(--blue);color:var(--blue);padding:8px 12px;border-radius:8px;text-decoration:none}
+
+    footer{max-width:1100px;margin:28px auto;padding:18px;text-align:center;color:var(--muted)}
+    @media (max-width:980px){
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero-right{width:100%;flex:unset}
+      .wrap{flex-direction:column;padding:0 16px}
+      .sidebar{width:100%}
+      .projects-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav">
+      <div class="brand">Adeena Yasin</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" id="workBtn" href="#contact">Work with me</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <section id="home" class="hero" aria-label="Hero">
+      <div class="hero-left">
+        <h1>Transforming Raw Data into Business Intelligence</h1>
+        <p class="lead">I’m <strong>Adeena Yasin</strong>, a BS in Business Analytics (IIUI). I clean messy datasets, build dashboards and predictive models, and deliver clear insights using SQL, Python, Power BI and Excel.</p>
+
+        <div class="buttons">
+          <a class="btn" href="#projects" id="viewProjectsBtn">View Projects</a>
+          <a class="btn ghost" href="#about">About Me</a>
+        </div>
+
+        <div class="hero-stats" aria-hidden="false">
+          <div class="stat">
+            <strong id="projectsCount">0</strong>
+            Projects Completed
+          </div>
+          <div class="stat">
+            <strong id="toolsCount">0</strong>
+            Tools Mastered
+          </div>
+          <div class="stat">
+            <strong id="clientSat">—</strong>
+            Client Satisfaction %
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card" role="img" aria-label="Data visualization">
+          <!-- data-themed image (no person) - replace with your own if you like -->
+          <img id="heroImg" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=097031b4a9da6de8c1b5f6d4b4ccf57e" alt="data visualization">
+          <div style="margin-top:10px;font-weight:700">Featured</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px">Explore my projects: data cleaning, dashboards and ML models.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MAIN -->
+  <main class="wrap" id="mainWrap">
+    <div class="content">
+      <!-- ABOUT -->
+      <section id="about" class="about" aria-labelledby="aboutTitle">
+        <div class="about-grid">
+          <div class="about-left">
+            <img src="https://images.unsplash.com/photo-1612832021072-12f2a3ddd110?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=c727f6a7b3b4d2f2db9d30f30b4c9e09" alt="data">
+          </div>
+          <div class="about-right">
+            <h3 id="aboutTitle">Transforming Data into Clarity, Confidence, and Intelligent Decisions</h3>
+            <p style="color:var(--muted);margin-top:8px;font-size:15px">
+              I’m <strong>Adeena Yasin</strong>, a BS in Business Analytics graduate from International Islamic University Islamabad (IIUI).
+              I specialize in data cleaning, exploratory data analysis, visualization, dashboard development and predictive modeling.
+              I work with SQL, Python (pandas, NumPy), Power BI, and Excel to convert raw datasets into meaningful, actionable business insights.
+            </p>
+
+            <div style="margin-top:12px">
+              <strong>What I’ve learned</strong>
+              <div class="learn-list" style="margin-top:8px">
+                <div class="skill-chip">SQL (joins, cleaning)</div>
+                <div class="skill-chip">Python (pandas, numpy)</div>
+                <div class="skill-chip">Power BI (DAX, visualization)</div>
+                <div class="skill-chip">Excel (pivot, formulas)</div>
+                <div class="skill-chip">EDA & Data Cleaning</div>
+                <div class="skill-chip">Basic Machine Learning</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" aria-labelledby="projectsTitle">
+        <div class="projects-header" style="margin-bottom:10px">
+          <h3 id="projectsTitle" style="margin:0">Featured Projects</h3>
+          <div style="color:var(--muted);font-size:13px">Click a project to view details • Use filters on the right</div>
+        </div>
+
+        <div id="projectsGrid" class="projects-grid" role="list">
+          <!-- Projects will be inserted by JS -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="panel" aria-label="Filters">
+        <h5>Filter Projects</h5>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Category</div>
+        <div class="checkbox"><input id="catAll" type="checkbox" checked><label for="catAll">All Categories</label></div>
+        <div class="checkbox"><input class="cat" type="checkbox" value="Data Cleaning" checked><label>Data Cleaning</label></div>
+        <div class="checkbox"><input class="cat" type="checkbox" value="Visualization" checked><label>Visualization</label></div>
+        <div class="checkbox"><input class="cat" type="checkbox" value="Dashboards" checked><label>Dashboards</label></div>
+        <div class="checkbox"><input class="cat" type="checkbox" value="ML Model" checked><label>ML Model</label></div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid #eef6f8"/>
+
+        <h5>Tools</h5>
+        <div class="checkbox"><input class="tool" type="checkbox" value="SQL" checked><label>SQL</label></div>
+        <div class="checkbox"><input class="tool" type="checkbox" value="Power BI" checked><label>Power BI</label></div>
+        <div class="checkbox"><input class="tool" type="checkbox" value="Python" checked><label>Python</label></div>
+        <div class="checkbox"><input class="tool" type="checkbox" value="Excel" checked><label>Excel</label></div>
+      </div>
+
+      <div style="height:14px"></div>
+
+      <div class="panel contact-card" id="contactCard">
+        <h5>Contact</h5>
+        <p style="margin:6px 0;color:var(--muted)">Email for collaborations or internships:</p>
+        <a href="mailto:adeenayasin149@gmail.com" class="blue-btn" style="display:inline-block">adeenayasin149@gmail.com</a>
+        <p style="margin-top:10px;font-size:13px;color:var(--muted)">Add your LinkedIn profile to your GitHub README for extra visibility.</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div style="color:var(--muted);font-size:14px">© <strong>Adeena Yasin</strong> — Data Analyst • Built with care.</div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-body">
+        <div class="modal-left">
+          <img id="modalImg" src="" alt="project image">
+        </div>
+        <div class="modal-right">
+          <h3 id="modalTitle">Project title</h3>
+          <p id="modalDesc" style="color:var(--muted)"></p>
+          <div style="margin-top:auto;display:flex;gap:10px">
+            <a id="modalRepo" class="btn-link" href="#" target="_blank">Open files</a>
+            <a id="modalDemo" class="btn-link" href="#" target="_blank">Open demo</a>
+            <button class="close" id="modalClose">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* --------------------------
+       Projects data — edit here
+       --------------------------*/
+    const projects = [
+      {
+        id: 'sales-bi',
+        title: 'Sales Dashboard in Power BI',
+        category: 'Dashboards',
+        tools: ['Power BI','SQL','Excel'],
+        level: 'Intermediate',
+        image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=097031b4a9da6de8c1b5f6d4b4ccf57e',
+        short: 'Interactive sales dashboard visualizing KPIs, monthly trends and regional performance.'
+      },
+      {
+        id: 'sql-cleaning',
+        title: 'Data Cleaning in SQL (Retail Sales)',
+        category: 'Data Cleaning',
+        tools: ['SQL'],
+        level: 'Intermediate',
+        image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=8df9b9c9a1e7b7a7e3f5d4a1b9f3f3b7',
+        short: 'Cleaned retail sales dataset: removed duplicates, fixed NULLs, standardized dates and amounts using SQL.'
+      },
+      {
+        id: 'diabetes-ml',
+        title: 'Diabetes Progression Prediction',
+        category: 'ML Model',
+        tools: ['Python','Machine Learning'],
+        level: 'Advanced',
+        image: 'https://images.unsplash.com/photo-1581091012184-7f7e3b81acce?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2c6d8d5a4c9e7af23f4c6c567e0b0f20',
+        short: 'Regression model to predict diabetes progression, including preprocessing, feature engineering and evaluation.'
+      },
+      {
+        id: 'scm-dashboard',
+        title: 'SCM Dashboard (Inventory & Suppliers)',
+        category: 'Visualization',
+        tools: ['Excel','Power BI'],
+        level: 'Beginner',
+        image: 'https://images.unsplash.com/photo-1526378722158-3d11b2f2f4f0?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7a8d28e9d9bf3efc0d1b7a1bb3c6f6e4',
+        short: 'Supply-chain dashboard to monitor inventory levels, lead times and supplier performance.'
+      },
+      {
+        id: 'cash-carry',
+        title: 'Cash & Carry App Analytics',
+        category: 'Dashboards',
+        tools: ['Power BI','Excel'],
+        level: 'Beginner',
+        image: 'https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=fbf2a2c1e5b1a6cd8f2f4d4a3c6e1f45',
+        short: 'Store-level sales & product analysis to track best sellers, inventory and daily revenues.'
+      }
+    ];
+
+    /* Helper to create HTML for a project card */
+    function createCard(p){
+      const toolsText = p.tools.join(' • ');
+      return `
+        <article class="card" role="listitem" data-category="${p.category}" data-tools="${p.tools.join(',')}">
+          <div style="position:relative">
+            <img src="${p.image}" alt="${p.title}">
+            <div style="position:absolute;left:12px;top:12px"><span class="tag">${p.level}</span></div>
+          </div>
+          <div class="card-body">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h4>${p.title}</h4>
+              <div class="meta">${p.category}</div>
+            </div>
+            <p>${p.short}</p>
+            <div class="meta" style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+              <small style="color:var(--muted)">${toolsText}</small>
+              <div><button class="btn" onclick="openProject('${p.id}')">View Project</button></div>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    /* Render projects */
+    const projectsGrid = document.getElementById('projectsGrid');
+    function render(list){
+      projectsGrid.innerHTML = list.map(p => createCard(p)).join('');
+      updateCounters();
+    }
+    render(projects);
+
+    /* Open project modal (or link) */
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalRepo = document.getElementById('modalRepo');
+    const modalDemo = document.getElementById('modalDemo');
+    const modalClose = document.getElementById('modalClose');
+
+    function openProject(id){
+      const p = projects.find(x=>x.id===id);
+      if(!p) return;
+      modalImg.src = p.image;
+      modalTitle.textContent = p.title;
+      modalDesc.textContent = p.short + ' • Tools: ' + p.tools.join(', ');
+      // If you have project files or demo links, set them here:
+      modalRepo.href = '#'; // replace with file link or repo path: ./files/${p.id}.zip
+      modalDemo.href = '#'; // replace with demo url if any
+      modalBackdrop.style.display = 'flex';
+      modalBackdrop.setAttribute('aria-hidden','false');
+    }
+    modalClose.addEventListener('click', ()=> { modalBackdrop.style.display = 'none'; modalBackdrop.setAttribute('aria-hidden','true'); });
+    modalBackdrop.addEventListener('click', (e)=>{ if(e.target===modalBackdrop){modalBackdrop.style.display='none'; modalBackdrop.setAttribute('aria-hidden','true');} });
+
+    /* Filters */
+    const catAll = document.getElementById('catAll');
+    const catCheckboxes = Array.from(document.querySelectorAll('.cat'));
+    const toolCheckboxes = Array.from(document.querySelectorAll('.tool'));
+
+    function applyFilters(){
+      const selectedCats = catCheckboxes.filter(c=>c.checked).map(c=>c.value);
+      const selectedTools = toolCheckboxes.filter(t=>t.checked).map(t=>t.value);
+
+      const filtered = projects.filter(p=>{
+        const catOk = selectedCats.length===0 ? true : selectedCats.includes(p.category);
+        const toolsOk = selectedTools.length===0 ? true : selectedTools.every(t => p.tools.includes(t));
+        return catOk && toolsOk;
+      });
+      render(filtered);
+    }
+
+    catAll.addEventListener('change', ()=>{
+      const st = catAll.checked;
+      catCheckboxes.forEach(c=>c.checked = st);
+      applyFilters();
+    });
+    catCheckboxes.forEach(c=>c.addEventListener('change', ()=>{
+      catAll.checked = catCheckboxes.every(c=>c.checked);
+      applyFilters();
+    }));
+    toolCheckboxes.forEach(t=>t.addEventListener('change', applyFilters));
+
+    /* Counters: projects and tools */
+    function updateCounters(){
+      const visibleCards = Array.from(document.querySelectorAll('#projectsGrid .card'));
+      document.getElementById('projectsCount').textContent = visibleCards.length;
+
+      const toolsSet = new Set();
+      visibleCards.forEach(card=>{
+        const t = (card.getAttribute('data-tools')||'').split(',').map(s=>s.trim()).filter(Boolean);
+        t.forEach(x=>toolsSet.add(x));
+      });
+      document.getElementById('toolsCount').textContent = toolsSet.size;
+
+      // client satisfaction: leave placeholder unless you add reviews
+      document.getElementById('clientSat').textContent = '—';
+    }
+
+    /* Smooth scroll nav links */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const href = this.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    /* Work with me button */
+    document.getElementById('workBtn').addEventListener('click', (e)=>{ /* default scroll */ });
+
+    /* On load - ensure counts */
+    window.addEventListener('load', ()=> { updateCounters(); });
+
+    /* Helper: if you add projects array later, call render(projects) again */
+  </script>
+</body>
+</html>
