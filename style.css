@@ -1,0 +1,87 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER / BLUE BAR */
+header {
+    background: #0a6cff;
+    padding: 18px 0;
+    color: white;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 16px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* HERO SECTION */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 60px auto;
+}
+
+.text {
+    width: 50%;
+}
+
+.text h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #0a6cff;
+    margin-bottom: 20px;
+}
+
+.text p {
+    font-size: 18px;
+    line-height: 28px;
+    color: #333;
+}
+
+/* SKILL CARDS */
+.skills-box {
+    display: flex;
+    margin-top: 25px;
+    gap: 15px;
+}
+
+.skill-card {
+    background: #eaf1ff;
+    padding: 12px 18px;
+    border-radius: 7px;
+    font-weight: 600;
+    color: #0a6cff;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* IMAGE RIGHT SIDE */
+.image-box img {
+    width: 420px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.3);
+}

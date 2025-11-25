@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Adeena Insights</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            border-left: 5px solid #1e6cff;
+            padding-left: 10px;
+        }
+
+        p {
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        button {
+            background: #1e6cff;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1053d1;
+        }
+
+        .social {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social img {
+            width: 30px;
+            margin: 0 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Get in Touch</h2>
+    <p>Please send us your inquiries; we’ll respond as soon as possible.</p>
+
+    <!-- CONTACT FORM -->
+    <form action="https://formsubmit.co/adeenayasin149@gmail.com" method="POST">
+
+        <div class="row">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+
+        <input type="text" name="subject" placeholder="Subject" required>
+
+        <textarea rows="6" name="message" placeholder="Message" required></textarea>
+
+        <!-- Disable CAPTCHA -->
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- Redirect after success -->
+        <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
+
+        <button type="submit">Send Message</button>
+    </form>
+
+    <!-- SOCIAL ICONS -->
+    <div class="social">
+        <img src="assets/whatsapp.png">
+        <img src="assets/facebook.png">
+        <img src="assets/instagram.png">
+        <img src="assets/linkedin.png">
+    </div>
+
+</div>
+
+</body>
+</html>
